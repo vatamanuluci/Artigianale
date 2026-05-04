@@ -5,7 +5,7 @@ import { Process } from "@/components/process"
 import { Gallery } from "@/components/gallery"
 import { Menu } from "@/components/menu"
 import { Pricing } from "@/components/pricing"
-import { Testimonials } from "@/components/testimonials"
+// import { Testimonials } from "@/components/testimonials"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { PageTransition } from "@/components/page-transition"
@@ -35,7 +35,6 @@ export default function Home() {
       <Gallery />
       <Menu />
       <Pricing />
-      <Testimonials />
       <SectionDivider />
       <FAQ />
       <SectionDivider />

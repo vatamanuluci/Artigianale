@@ -106,28 +106,26 @@ export function About() {
             style={{ y: imageY }}
             className="lg:col-span-7 relative"
           >
-            <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
               {/* Main image — pizza */}
-              <div className="relative overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <Image
                   src="/images/pizza-arugula.jpeg"
                   alt="Pizza artizanală cu rucola"
-                  width={700}
-                  height={700}
-                  className="w-full h-auto"
+                  fill
+                  className="object-cover"
                 />
               </div>
               
               {/* Food truck image — prominent */}
-              <div className="relative overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <Image
                   src="/images/gozney-oven-flames.jpeg"
                   alt="Cuptor Gozney cu flacără lungă"
-                  width={700}
-                  height={467}
-                  className="w-full h-auto"
+                  fill
+                  className="object-cover"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/70 to-transparent p-6">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/70 to-transparent p-4">
                   <span className="text-[10px] tracking-[0.3em] text-accent uppercase">Cuptor cu flacără lungă</span>
                 </div>
               </div>
