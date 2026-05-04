@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+:root {
+  --background: #FEF8EF;
+  --foreground: #2C2825;
+  
+  --card: #F6EFE4;
+  --card-foreground: #2C2825;
+  
+  --popover: #FEF8EF;
+  --popover-foreground: #2C2825;
+  
+  --primary: #2C2825;
+  --primary-foreground: #FEF8EF;
+  
+  --secondary: #F0E8DC;
+  --secondary-foreground: #3D3630;
+  
+  --muted: #EDE5D9;
+  --muted-foreground: #7A6D5D;
+  
+  --accent: #C4A97D;
+  --accent-foreground: #2C2825;
+  
+  --dark-muted: #9A8B78;
+  --muted-emphasis: #6B5E50;
+  
+  --destructive: #B54A32;
+  --destructive-foreground: #FEF8EF;
+  
+  --border: #E6DDD0;
+  --input: #F0E8DC;
+  --ring: #8C7E6E;
+  
+  --chart-1: #C4A97D;
+  --chart-2: #8C7E6E;
+  --chart-3: #6B5E50;
+  --chart-4: #D4BC94;
+  --chart-5: #A89474;
+  --radius: 0rem;
+  --sidebar: #FEF8EF;
+  --sidebar-foreground: #2C2825;
+  --sidebar-primary: #2C2825;
+  --sidebar-primary-foreground: #FEF8EF;
+  --sidebar-accent: #F6EFE4;
+  --sidebar-accent-foreground: #2C2825;
+  --sidebar-border: #E6DDD0;
+  --sidebar-ring: #8C7E6E;
+}
+
+
+@theme inline {
+  --font-sans: var(--font-sans), 'Inter', system-ui, sans-serif;
+  --font-serif: var(--font-serif), 'Playfair Display', Georgia, serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-dark-muted: var(--dark-muted);
+  --color-muted-emphasis: var(--muted-emphasis);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+  ::selection {
+    background-color: rgba(196, 169, 125, 0.3);
+    color: #2C2825;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D4C4AC;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #B5A48A;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+}
