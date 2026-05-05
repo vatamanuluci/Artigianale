@@ -1,24 +1,4 @@
-import nodemailer from "nodemailer"
 import { NextResponse } from "next/server"
-
-function createTransporter() {
-  const user = process.env.GMAIL_USER
-  const pass = process.env.GMAIL_APP_PASSWORD
-
-  if (!user || !pass) {
-    throw new Error(`Missing env vars: GMAIL_USER=${!!user}, GMAIL_APP_PASSWORD=${!!pass}`)
-  }
-
-  return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: { user, pass },
-    connectionTimeout: 8000,
-    greetingTimeout: 8000,
-    socketTimeout: 8000,
-  })
-}
 
 // HTML sanitization — escape dangerous characters
 function esc(str: string): string {
@@ -44,6 +24,32 @@ function isRateLimited(ip: string): boolean {
   }
   entry.count++
   return entry.count > RATE_LIMIT
+}
+
+async function sendEmail(to: string, subject: string, html: string, replyTo?: string) {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) throw new Error("Missing RESEND_API_KEY env var")
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      from: "ARTIGIANALE <onboarding@resend.dev>",
+      to: [to],
+      subject,
+      html,
+      reply_to: replyTo,
+    }),
+  })
+
+  const data = await res.json()
+  if (!res.ok) {
+    throw new Error(`Resend error: ${JSON.stringify(data)}`)
+  }
+  return data
 }
 
 export async function POST(request: Request) {
@@ -93,16 +99,13 @@ export async function POST(request: Request) {
       message: esc(message || ""),
     }
 
-    const transporter = createTransporter()
-    console.log("[contact] Transporter created, GMAIL_USER:", process.env.GMAIL_USER)
+    const recipient = process.env.GMAIL_USER || "lucivatamanu@gmail.com"
 
     // Send notification email to business
-    const notifResult = await transporter.sendMail({
-      from: `ARTIGIANALE Website <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
-      replyTo: email,
-      subject: `Cerere nouă de ofertă — ${s.name}`,
-      html: `
+    const notif = await sendEmail(
+      recipient,
+      `Cerere nouă de ofertă — ${s.name}`,
+      `
         <h2>Cerere nouă de pe site</h2>
         <table style="border-collapse: collapse; width: 100%; max-width: 500px;">
           <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Nume</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${s.name}</td></tr>
@@ -114,15 +117,15 @@ export async function POST(request: Request) {
           <tr><td style="padding: 8px; font-weight: bold;">Mesaj</td><td style="padding: 8px;">${s.message || "—"}</td></tr>
         </table>
       `,
-    })
-    console.log("[contact] Notification sent:", notifResult.messageId, notifResult.response)
+      email,
+    )
+    console.log("[contact] Notification sent:", notif)
 
     // Send confirmation email to customer
-    const confirmResult = await transporter.sendMail({
-      from: `ARTIGIANALE <${process.env.GMAIL_USER}>`,
-      to: email,
-      subject: "Am primit cererea ta — ARTIGIANALE",
-      html: `
+    const confirm = await sendEmail(
+      email,
+      "Am primit cererea ta — ARTIGIANALE",
+      `
         <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; color: #2C2825;">
           <div style="border-bottom: 1px solid #E6DDD0; padding-bottom: 24px; margin-bottom: 24px;">
             <h1 style="font-size: 24px; margin: 0;">ARTIGIANALE</h1>
@@ -148,18 +151,10 @@ export async function POST(request: Request) {
           </div>
         </div>
       `,
-    })
-    console.log("[contact] Confirmation sent:", confirmResult.messageId, confirmResult.response)
+    )
+    console.log("[contact] Confirmation sent:", confirm)
 
-    return NextResponse.json({
-      success: true,
-      debug: {
-        notifId: notifResult.messageId,
-        notifResponse: notifResult.response,
-        confirmId: confirmResult.messageId,
-        confirmResponse: confirmResult.response,
-      },
-    })
+    return NextResponse.json({ success: true })
   } catch (error) {
     console.error("Contact form error:", error)
     const errMsg = error instanceof Error ? error.message : String(error)
