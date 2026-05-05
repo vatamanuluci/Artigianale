@@ -1,13 +1,19 @@
 import nodemailer from "nodemailer"
 import { NextResponse } from "next/server"
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-})
+function createTransporter() {
+  const user = process.env.GMAIL_USER
+  const pass = process.env.GMAIL_APP_PASSWORD
+
+  if (!user || !pass) {
+    throw new Error(`Missing env vars: GMAIL_USER=${!!user}, GMAIL_APP_PASSWORD=${!!pass}`)
+  }
+
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  })
+}
 
 // HTML sanitization — escape dangerous characters
 function esc(str: string): string {
@@ -81,6 +87,8 @@ export async function POST(request: Request) {
       eventType: esc(eventType),
       message: esc(message || ""),
     }
+
+    const transporter = createTransporter()
 
     // Send notification email to business
     await transporter.sendMail({
