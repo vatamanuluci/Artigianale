@@ -89,9 +89,10 @@ export async function POST(request: Request) {
     }
 
     const transporter = createTransporter()
+    console.log("[contact] Transporter created, GMAIL_USER:", process.env.GMAIL_USER)
 
     // Send notification email to business
-    await transporter.sendMail({
+    const notifResult = await transporter.sendMail({
       from: `ARTIGIANALE Website <${process.env.GMAIL_USER}>`,
       to: process.env.GMAIL_USER,
       replyTo: email,
@@ -109,9 +110,10 @@ export async function POST(request: Request) {
         </table>
       `,
     })
+    console.log("[contact] Notification sent:", notifResult.messageId, notifResult.response)
 
     // Send confirmation email to customer
-    await transporter.sendMail({
+    const confirmResult = await transporter.sendMail({
       from: `ARTIGIANALE <${process.env.GMAIL_USER}>`,
       to: email,
       subject: "Am primit cererea ta — ARTIGIANALE",
@@ -142,12 +144,22 @@ export async function POST(request: Request) {
         </div>
       `,
     })
+    console.log("[contact] Confirmation sent:", confirmResult.messageId, confirmResult.response)
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({
+      success: true,
+      debug: {
+        notifId: notifResult.messageId,
+        notifResponse: notifResult.response,
+        confirmId: confirmResult.messageId,
+        confirmResponse: confirmResult.response,
+      },
+    })
   } catch (error) {
     console.error("Contact form error:", error)
+    const errMsg = error instanceof Error ? error.message : String(error)
     return NextResponse.json(
-      { error: "A apărut o eroare. Încercați din nou." },
+      { error: "A apărut o eroare. Încercați din nou.", debug: errMsg },
       { status: 500 }
     )
   }
