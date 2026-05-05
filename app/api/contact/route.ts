@@ -69,7 +69,8 @@ export async function POST(request: Request) {
 
     // Honeypot — if filled, it's a bot
     if (body.fax_number) {
-      return NextResponse.json({ success: true })
+      console.log("[contact] Honeypot triggered, skipping email")
+      return NextResponse.json({ success: true, honeypot: true })
     }
 
     // Validate required fields
