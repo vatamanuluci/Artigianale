@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     const { name, email, phone, date, guests, eventType, message } = body
 
     // Honeypot — if filled, it's a bot
-    if (body.website) {
+    if (body.fax_number) {
       return NextResponse.json({ success: true })
     }
 

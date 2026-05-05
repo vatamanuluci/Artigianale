@@ -14,7 +14,7 @@ export function Contact() {
     eventType: "",
     guests: "",
     message: "",
-    website: "",
+    fax_number: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -70,7 +70,7 @@ export function Contact() {
         eventType: "",
         guests: "",
         message: "",
-        website: "",
+        fax_number: "",
       })
     } catch (err) {
       trackEvent("form_error")
@@ -208,9 +208,9 @@ export function Contact() {
               {/* Honeypot — hidden from real users, catches bots */}
               <input
                 type="text"
-                name="website"
-                value={formData.website || ""}
-                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                name="fax_number"
+                value={formData.fax_number || ""}
+                onChange={(e) => setFormData({ ...formData, fax_number: e.target.value })}
                 autoComplete="off"
                 tabIndex={-1}
                 aria-hidden="true"
