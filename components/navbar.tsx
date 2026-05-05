@@ -176,7 +176,15 @@ export function Navbar() {
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors"
                 >
-                  Instagram
+                  @vatamanuluci
+                </a>
+                <a
+                  href="https://instagram.com/artigianale.events"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  @artigianale.events
                 </a>
               </motion.div>
             </div>

@@ -80,7 +80,7 @@ export function About() {
             <div className="flex gap-12 pt-10 border-t border-border">
               <div>
                 <span className="font-serif text-3xl text-foreground">
-                  <AnimatedCounter value={100} suffix="+" />
+                  <AnimatedCounter value={10} suffix="+" />
                 </span>
                 <p className="text-muted-foreground text-sm mt-1">Evenimente</p>
               </div>
@@ -88,7 +88,7 @@ export function About() {
                 <span className="font-serif text-3xl text-foreground">
                   <AnimatedCounter value={5000} formatter={(n) => n >= 1000 ? Math.round(n / 1000) + "k+" : n + "+"} />
                 </span>
-                <p className="text-muted-foreground text-sm mt-1">Invitați</p>
+                <p className="text-muted-foreground text-sm mt-1">Clienți</p>
               </div>
               <div>
                 <span className="font-serif text-3xl text-foreground">4.9</span>
@@ -113,6 +113,7 @@ export function About() {
                   src="/images/pizza-arugula.jpeg"
                   alt="Pizza artizanală cu rucola"
                   fill
+                  sizes="(max-width: 1024px) 50vw, 29vw"
                   className="object-cover"
                 />
               </div>
@@ -123,6 +124,7 @@ export function About() {
                   src="/images/gozney-oven-flames.jpeg"
                   alt="Cuptor Gozney cu flacără lungă"
                   fill
+                  sizes="(max-width: 1024px) 50vw, 29vw"
                   className="object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/70 to-transparent p-4">

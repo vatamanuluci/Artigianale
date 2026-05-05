@@ -1,9 +1,6 @@
-import { track } from "@vercel/analytics"
-
+// Lightweight event tracking stub — replace with your analytics provider if needed
 export function trackEvent(name: string, properties?: Record<string, string | number | boolean>) {
-  try {
-    track(name, properties)
-  } catch {
-    // Analytics not loaded or blocked — fail silently
+  if (typeof window !== "undefined" && process.env.NODE_ENV === "production") {
+    console.debug("[event]", name, properties)
   }
 }

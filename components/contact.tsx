@@ -14,6 +14,7 @@ export function Contact() {
     eventType: "",
     guests: "",
     message: "",
+    website: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -69,6 +70,7 @@ export function Contact() {
         eventType: "",
         guests: "",
         message: "",
+        website: "",
       })
     } catch (err) {
       trackEvent("form_error")
@@ -141,9 +143,11 @@ export function Contact() {
                   <span className="text-xs tracking-[0.2em] text-muted-foreground uppercase block mb-1">
                     Instagram
                   </span>
-                  <a href="https://instagram.com/vatamanuluci" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-foreground/70 transition-colors">@vatamanuluci</a>
-                  <span className="text-muted-foreground mx-1">&middot;</span>
-                  <a href="https://instagram.com/artigianale.events" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-foreground/70 transition-colors">@artigianale.events</a>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-0">
+                    <a href="https://instagram.com/vatamanuluci" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-foreground/70 transition-colors">@vatamanuluci</a>
+                    <span className="text-muted-foreground mx-1 hidden sm:inline">&middot;</span>
+                    <a href="https://instagram.com/artigianale.events" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-foreground/70 transition-colors">@artigianale.events</a>
+                  </div>
                 </div>
               </div>
 
@@ -201,6 +205,17 @@ export function Contact() {
             ) : (
             <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot — hidden from real users, catches bots */}
+              <input
+                type="text"
+                name="website"
+                value={formData.website || ""}
+                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="absolute opacity-0 h-0 w-0 overflow-hidden pointer-events-none"
+              />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label

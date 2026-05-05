@@ -40,7 +40,7 @@ export function CookieConsent() {
             <p className="text-sm leading-relaxed text-dark-muted flex-1">
               Folosim cookie-uri pentru analiză și pentru a îmbunătăți experiența pe site.
               Prin continuarea navigării, ești de acord cu{" "}
-              <span className="text-background underline underline-offset-2">politica noastră de confidențialitate</span>.
+              <a href="mailto:lucivatamanu@gmail.com" className="text-background underline underline-offset-2 hover:text-accent transition-colors">politica noastră de confidențialitate</a>.
             </p>
             <div className="flex gap-3 flex-shrink-0">
               <button

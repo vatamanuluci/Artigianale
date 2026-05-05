@@ -5,7 +5,6 @@ import { Process } from "@/components/process"
 import { Gallery } from "@/components/gallery"
 import { Menu } from "@/components/menu"
 import { Pricing } from "@/components/pricing"
-// import { Testimonials } from "@/components/testimonials"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { PageTransition } from "@/components/page-transition"
@@ -13,7 +12,6 @@ import { BackToTop } from "@/components/back-to-top"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { FAQ } from "@/components/faq"
 import { CookieConsent } from "@/components/cookie-consent"
-// import { VideoSection } from "@/components/video-section" // Uncomment when you have a real video
 
 function SectionDivider({ className = "" }: { className?: string }) {
   return (
@@ -31,7 +29,6 @@ export default function Home() {
       <Hero />
       <About />
       <Process />
-      {/* <VideoSection /> */}
       <Gallery />
       <Menu />
       <Pricing />

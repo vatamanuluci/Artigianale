@@ -41,19 +41,21 @@ export function Footer() {
                 href="https://instagram.com/vatamanuluci"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 flex items-center justify-center border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent/40 transition-all duration-300"
+                className="group flex items-center gap-2 px-3 h-11 border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent/40 transition-all duration-300"
                 aria-label="Instagram @vatamanuluci"
               >
-                <Instagram size={18} strokeWidth={1.5} />
+                <Instagram size={16} strokeWidth={1.5} />
+                <span className="text-[10px] tracking-wide hidden sm:inline">@vatamanuluci</span>
               </a>
               <a
                 href="https://instagram.com/artigianale.events"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-11 h-11 flex items-center justify-center border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent/40 transition-all duration-300"
+                className="group flex items-center gap-2 px-3 h-11 border border-accent/20 text-accent hover:bg-accent/10 hover:border-accent/40 transition-all duration-300"
                 aria-label="Instagram @artigianale.events"
               >
-                <Instagram size={18} strokeWidth={1.5} />
+                <Instagram size={16} strokeWidth={1.5} />
+                <span className="text-[10px] tracking-wide hidden sm:inline">@artigianale.events</span>
               </a>
               <a
                 href="tel:0732116589"
