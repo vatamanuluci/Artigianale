@@ -121,38 +121,42 @@ export async function POST(request: Request) {
     )
     console.log("[contact] Notification sent:", notif)
 
-    // Send confirmation email to customer
-    const confirm = await sendEmail(
-      email,
-      "Am primit cererea ta — ARTIGIANALE",
-      `
-        <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; color: #2C2825;">
-          <div style="border-bottom: 1px solid #E6DDD0; padding-bottom: 24px; margin-bottom: 24px;">
-            <h1 style="font-size: 24px; margin: 0;">ARTIGIANALE</h1>
+    // Send confirmation email to customer (best-effort, may fail on free Resend plan)
+    try {
+      const confirm = await sendEmail(
+        email,
+        "Am primit cererea ta — ARTIGIANALE",
+        `
+          <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; color: #2C2825;">
+            <div style="border-bottom: 1px solid #E6DDD0; padding-bottom: 24px; margin-bottom: 24px;">
+              <h1 style="font-size: 24px; margin: 0;">ARTIGIANALE</h1>
+            </div>
+            <p style="font-size: 16px; line-height: 1.6;">Bună ${s.name},</p>
+            <p style="font-size: 16px; line-height: 1.6;">
+              Mulțumim pentru interesul acordat! Am primit cererea ta și revenim cu o ofertă personalizată 
+              în <strong>maximum 24 de ore</strong>.
+            </p>
+            <p style="font-size: 16px; line-height: 1.6;">Detaliile trimise de tine:</p>
+            <table style="border-collapse: collapse; width: 100%; margin: 16px 0;">
+              <tr><td style="padding: 8px 0; color: #7A6D5D; width: 140px;">Tip eveniment</td><td style="padding: 8px 0;">${s.eventType}</td></tr>
+              ${s.date ? `<tr><td style="padding: 8px 0; color: #7A6D5D;">Data</td><td style="padding: 8px 0;">${s.date}</td></tr>` : ""}
+              ${s.guests ? `<tr><td style="padding: 8px 0; color: #7A6D5D;">Nr. invitați</td><td style="padding: 8px 0;">${s.guests}</td></tr>` : ""}
+            </table>
+            <p style="font-size: 16px; line-height: 1.6;">
+              Între timp, ne poți contacta direct pe WhatsApp la 
+              <a href="https://wa.me/40732116589" style="color: #C4A97D;">0732 116 589</a>.
+            </p>
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #E6DDD0; color: #7A6D5D; font-size: 13px;">
+              <p style="margin: 0;">Cu drag, echipa ARTIGIANALE</p>
+              <p style="margin: 4px 0 0;">Pizza artizanală la evenimentul tău</p>
+            </div>
           </div>
-          <p style="font-size: 16px; line-height: 1.6;">Bună ${s.name},</p>
-          <p style="font-size: 16px; line-height: 1.6;">
-            Mulțumim pentru interesul acordat! Am primit cererea ta și revenim cu o ofertă personalizată 
-            în <strong>maximum 24 de ore</strong>.
-          </p>
-          <p style="font-size: 16px; line-height: 1.6;">Detaliile trimise de tine:</p>
-          <table style="border-collapse: collapse; width: 100%; margin: 16px 0;">
-            <tr><td style="padding: 8px 0; color: #7A6D5D; width: 140px;">Tip eveniment</td><td style="padding: 8px 0;">${s.eventType}</td></tr>
-            ${s.date ? `<tr><td style="padding: 8px 0; color: #7A6D5D;">Data</td><td style="padding: 8px 0;">${s.date}</td></tr>` : ""}
-            ${s.guests ? `<tr><td style="padding: 8px 0; color: #7A6D5D;">Nr. invitați</td><td style="padding: 8px 0;">${s.guests}</td></tr>` : ""}
-          </table>
-          <p style="font-size: 16px; line-height: 1.6;">
-            Între timp, ne poți contacta direct pe WhatsApp la 
-            <a href="https://wa.me/40732116589" style="color: #C4A97D;">0732 116 589</a>.
-          </p>
-          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #E6DDD0; color: #7A6D5D; font-size: 13px;">
-            <p style="margin: 0;">Cu drag, echipa ARTIGIANALE</p>
-            <p style="margin: 4px 0 0;">Pizza artizanală la evenimentul tău</p>
-          </div>
-        </div>
-      `,
-    )
-    console.log("[contact] Confirmation sent:", confirm)
+        `,
+      )
+      console.log("[contact] Confirmation sent:", confirm)
+    } catch (e) {
+      console.warn("[contact] Confirmation email skipped (free plan):", e)
+    }
 
     return NextResponse.json({ success: true })
   } catch (error) {
