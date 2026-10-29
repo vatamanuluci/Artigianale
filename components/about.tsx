@@ -1,37 +1,8 @@
 "use client"
 
-import { motion, useScroll, useTransform, useInView, useMotionValue, useSpring } from "framer-motion"
-import { useRef, useEffect, useCallback } from "react"
-import Image from "next/image"
-
-function AnimatedCounter({ value, suffix = "", formatter }: { value: number; suffix?: string; formatter?: (n: number) => string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const motionValue = useMotionValue(0)
-  const springValue = useSpring(motionValue, { duration: 2000, bounce: 0 })
-
-  const format = useCallback(
-    (n: number) => (formatter ? formatter(n) : n + suffix),
-    [formatter, suffix]
-  )
-
-  useEffect(() => {
-    if (isInView) {
-      motionValue.set(value)
-    }
-  }, [isInView, motionValue, value])
-
-  useEffect(() => {
-    const unsubscribe = springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = format(Math.round(latest))
-      }
-    })
-    return unsubscribe
-  }, [springValue, format])
-
-  return <span ref={ref}>{format(0)}</span>
-}
+import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef } from "react"
+import { EventVideo } from "@/components/event-video"
 
 export function About() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -70,68 +41,47 @@ export function About() {
                 ingrediente alese cu grijă, foc real.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed">
+                Venim la eveniment cu rulota sau cu un setup mobil, în funcție de
+                spațiu și de formatul ales. Setup-ul mobil aduce prepararea mai
+                aproape de invitați și face experiența de live cooking și mai captivantă.
+              </p>
+              <p className="text-muted-foreground text-base leading-relaxed">
                 Invitații tăi văd cum se pregătește pizza chiar în fața lor — 
                 de la aluatul întins cu mâna până la coacerea în cuptor. 
                 Nu e doar mâncare, e parte din eveniment.
               </p>
             </div>
 
-            {/* Stats */}
-            <div className="flex gap-12 pt-10 border-t border-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-10 border-t border-border">
               <div>
-                <span className="font-serif text-3xl text-foreground">
-                  <AnimatedCounter value={10} suffix="+" />
+                <span className="font-serif text-xl text-foreground">
+                  O grămadă de
                 </span>
-                <p className="text-muted-foreground text-sm mt-1">Evenimente</p>
+                <p className="text-muted-foreground text-sm mt-1">clienți mulțumiți</p>
               </div>
               <div>
-                <span className="font-serif text-3xl text-foreground">
-                  <AnimatedCounter value={5000} formatter={(n) => n >= 1000 ? Math.round(n / 1000) + "k+" : n + "+"} />
+                <span className="font-serif text-xl text-foreground">
+                  Feedback
                 </span>
-                <p className="text-muted-foreground text-sm mt-1">Clienți</p>
-              </div>
-              <div>
-                <span className="font-serif text-3xl text-foreground">4.9</span>
-                <p className="text-muted-foreground text-sm mt-1">Rating</p>
+                <p className="text-muted-foreground text-sm mt-1">doar pozitiv</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Right column - Images */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
             style={{ y: imageY }}
-            className="lg:col-span-7 relative"
+            className="lg:col-span-7 relative min-w-0"
           >
-            <div className="grid grid-cols-2 gap-4">
-              {/* Main image — pizza */}
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <Image
-                  src="/images/pizza-arugula.jpeg"
-                  alt="Pizza artizanală cu rucola"
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 29vw"
-                  className="object-cover"
-                />
-              </div>
-              
-              {/* Food truck image — prominent */}
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <Image
-                  src="/images/gozney-oven-flames.jpeg"
-                  alt="Cuptor Gozney cu flacără lungă"
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 29vw"
-                  className="object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/70 to-transparent p-4">
-                  <span className="text-[10px] tracking-[0.3em] text-accent uppercase">Cuptor cu flacără lungă</span>
-                </div>
-              </div>
-            </div>
+            <EventVideo
+              src="/images/WhatsApp Video 2026-10-29 at 14.32.38 (1).mp4"
+              poster="/images/WhatsApp Image 2026-10-29 at 14.32.35.jpeg"
+              label="Experiența ARTIGIANALE de live cooking"
+              className="mx-auto aspect-[9/16] w-full max-w-[360px]"
+            />
           </motion.div>
         </div>
       </div>

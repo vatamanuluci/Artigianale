@@ -7,7 +7,11 @@ import { Plus } from "lucide-react"
 const faqs = [
   {
     question: "Cât durează servirea la un eveniment?",
-    answer: "Depinde de pachet: 4 ore pentru Standard, 5 ore pentru Premium și 2 ore pentru Kids. Putem extinde durata la cerere, contra cost.",
+    answer: "Stabilim durata servirii în oferta personalizată, în funcție de numărul de invitați și programul evenimentului, atât pentru Pizza Only, cât și pentru Pizza + Focaccia Bar. Putem extinde durata la cerere, contra cost.",
+  },
+  {
+    question: "Ce include în plus Focaccia Bar?",
+    answer: "Pachetul Pizza + Focaccia Bar include tot ce oferă Pizza Only, plus focaccia și platouri cu brânzeturi, nuci și măsline, care acompaniază pizza pe parcursul evenimentului.",
   },
   {
     question: "Ce se întâmplă dacă plouă?",
@@ -27,11 +31,11 @@ const faqs = [
   },
   {
     question: "Ce spațiu aveți nevoie pentru setup?",
-    answer: "Rulota are nevoie de un spațiu de aproximativ 6×3 metri, pe teren plat și accesibil. Nu avem nevoie de priză — totul funcționează pe gaz. Venim cu 1–2 ore înainte de eveniment pentru montaj.",
+    answer: "Putem veni cu rulota sau cu un setup mobil, care aduce experiența de live cooking mai aproape de invitați. Rulota are nevoie de un spațiu de aproximativ 6×3 metri, pe teren plat și accesibil. Pentru setup-ul mobil, stabilim împreună spațiul necesar în funcție de locație. Cuptoarele funcționează pe gaz. Venim cu 1–2 ore înainte de eveniment pentru montaj.",
   },
   {
     question: "Prețul include totul?",
-    answer: "Da. Prețul include rulota, cuptorul, toate ingredientele, echipa de 3 persoane, montaj și demontaj, farfurii și șervețele. Transportul e inclus până la 50 km — peste se adaugă un cost de deplasare.",
+    answer: "Da. Oferta include rulota sau setup-ul mobil, în funcție de formatul ales, cuptorul, toate ingredientele, echipa de 3 persoane, montaj și demontaj, farfurii și șervețele. Transportul e inclus până la 50 km — peste se adaugă un cost de deplasare.",
   },
 ]
 

@@ -6,41 +6,29 @@ import { Check } from "lucide-react"
 
 const packages = [
   {
-    name: "Standard",
+    name: "Pizza Only",
+    description: "Pizza artizanală, coaptă pe loc și servită continuu la evenimentul tău.",
     features: [
-      "5 sortimente pizza",
-      "Din gama Classics + Regular",
-      "Rulotă + cuptoare pe gaz",
-      "Echipă de 3 persoane",
-      "Setup complet",
-      "Servire continuă 4h",
+      "5–6 sortimente de pizza servite constant",
+      "Preparare live pe toată durata serviciului",
+      "Transport și setup complet",
+      "Rulotă sau setup mobil pentru live cooking",
+      "Cuptoare pe gaz",
     ],
     popular: false,
   },
   {
-    name: "Premium",
+    name: "Pizza + Focaccia Bar",
+    description: "Pizza artizanală, completată de focaccia și platouri cu brânzeturi, nuci și măsline, care acompaniază pizza.",
     features: [
-      "6 sortimente pizza",
-      "Din toată gama, inclusiv Special",
-      "Desert pizza inclus",
-      "Rulotă + cuptoare pe gaz",
-      "Echipă de 3 persoane",
-      "Decor tematic la rulotă",
-      "Servire continuă 5h",
+      "5–6 sortimente de pizza servite constant",
+      "Preparare live pe toată durata serviciului",
+      "Focaccia bar și platouri cu brânzeturi, nuci și măsline",
+      "Transport și setup complet",
+      "Rulotă sau setup mobil pentru live cooking",
+      "Cuptoare pe gaz",
     ],
     popular: true,
-  },
-  {
-    name: "Kids",
-    features: [
-      "Până la 50 copii",
-      "Margherita + 2 sortimente",
-      "Copiii își fac propria pizza",
-      "Setup compact",
-      "Echipă dedicată",
-      "Servire 2h",
-    ],
-    popular: false,
   },
 ]
 
@@ -64,11 +52,11 @@ export function Pricing() {
             Pachetele noastre
           </h2>
           <p className="text-dark-muted text-base max-w-lg mx-auto">
-            Prețul depinde de numărul de invitați. Alege pachetul potrivit și solicită o ofertă personalizată.
+            Alege Pizza Only sau completează experiența cu Focaccia Bar. Solicită o ofertă personalizată pentru evenimentul tău.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {packages.map((pkg, index) => (
             <motion.div
               key={pkg.name}
@@ -102,6 +90,11 @@ export function Pricing() {
                   }`}>
                     {pkg.name}
                   </h3>
+                  <p className={`text-sm leading-relaxed ${
+                    pkg.popular ? "text-foreground/80" : "text-dark-muted"
+                  }`}>
+                    {pkg.description}
+                  </p>
                 </div>
 
                 <div className="space-y-4 mb-10">

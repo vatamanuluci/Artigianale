@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Flame, Clock, Users } from "lucide-react"
+import { EventVideo } from "@/components/event-video"
 
 const highlights = [
   { icon: Flame, label: "Cuptor cu flacără lungă", desc: "Coace 4 pizze simultan, pe foc real" },
@@ -73,47 +74,18 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* Mobile hero image — visible only on small/medium screens */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative lg:hidden -mx-6 overflow-hidden"
-            >
-              <Image
-                src="/images/food-truck-sketch.png"
-                alt="ARTIGIANALE Horsebox Pizza Truck"
-                width={600}
-                height={400}
-                className="w-full max-w-md h-auto"
-                loading="eager"
-              />
-            </motion.div>
-
-            {/* Right — food truck sketch (desktop) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="relative hidden lg:block"
+              className="relative min-w-0"
             >
-              <Image
-                src="/images/food-truck-sketch.png"
-                alt="ARTIGIANALE Horsebox Pizza Truck"
-                width={700}
-                height={467}
-                className="w-full h-auto"
-                loading="eager"
+              <EventVideo
+                src="/images/WhatsApp Video 2026-10-29 at 14.32.39 (1).mp4"
+                poster="/images/2.jpeg"
+                label="ARTIGIANALE, pizza pregătită live la evenimente"
+                className="mx-auto aspect-[9/16] w-full max-w-[360px]"
               />
-              <div className="absolute -bottom-6 -left-6 bg-background p-4 shadow-lg">
-                <Image
-                  src="/images/pizza-pepperoni-box.jpeg"
-                  alt="Pizza pepperoni în cutie"
-                  width={160}
-                  height={107}
-                  className="w-36 h-auto object-cover"
-                />
-              </div>
             </motion.div>
           </div>
         </div>

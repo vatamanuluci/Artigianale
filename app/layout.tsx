@@ -62,7 +62,6 @@ const jsonLd = {
     '@type': 'Country',
     name: 'Romania',
   },
-  priceRange: '€€',
   servesCuisine: 'Pizza Napoletană',
   sameAs: [
     'https://instagram.com/vatamanuluci',

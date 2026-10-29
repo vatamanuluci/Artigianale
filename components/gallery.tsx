@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { EventVideo } from "@/components/event-video"
 
 export function Gallery() {
   return (
     <section id="gallery" className="relative py-32 lg:py-44 bg-foreground overflow-hidden">
       {/* Smooth transition from light section */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-card to-transparent pointer-events-none" />
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-5xl px-8 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,6 +25,22 @@ export function Gallery() {
           </h2>
         </motion.div>
 
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          {[
+            "WhatsApp Video 2026-10-29 at 14.32.39.mp4",
+            "WhatsApp Video 2026-10-29 at 14.32.38.mp4",
+            "WhatsApp Video 2026-10-29 at 14.32.39 (2).mp4",
+            "WhatsApp Video 2026-10-29 at 14.32.39 (4).mp4",
+          ].map((filename, index) => (
+            <EventVideo
+              key={filename}
+              src={`/images/${filename}`}
+              label={`Pizza și live cooking la evenimente ARTIGIANALE, clip ${index + 1}`}
+              className="aspect-[9/16] w-full min-w-0"
+            />
+          ))}
+        </div>
+
         {/* Row 1: Large + small stacked */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
           <motion.div
@@ -34,15 +51,15 @@ export function Gallery() {
             className="md:col-span-7 relative aspect-[4/3] overflow-hidden group"
           >
             <Image
-              src="/images/gozney-oven-flames.jpeg"
-              alt="Cuptor Gozney cu flacără lungă"
+              src="/images/WhatsApp Image 2026-10-29 at 14.32.37.jpeg"
+              alt="Preparare live la setup-ul mobil ARTIGIANALE"
               fill
               sizes="(max-width: 768px) 100vw, 58vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <span className="text-[10px] tracking-[0.3em] text-accent uppercase">Cuptorul Gozney</span>
+              <span className="text-[10px] tracking-[0.3em] text-accent uppercase">Live cooking</span>
             </div>
           </motion.div>
 
@@ -75,15 +92,15 @@ export function Gallery() {
               className="relative aspect-[16/9] overflow-hidden group"
             >
               <Image
-                src="/images/trailer-interior.jpeg"
-                alt="Interiorul rulotei ARTIGIANALE"
+                src="/images/WhatsApp Image 2026-10-29 at 14.32.38 (3).jpeg"
+                alt="Setup mobil cu cuptor și servire la eveniment"
                 fill
                 sizes="(max-width: 768px) 100vw, 42vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="text-[10px] tracking-[0.3em] text-accent uppercase">Rulota noastră</span>
+                <span className="text-[10px] tracking-[0.3em] text-accent uppercase">Setup mobil</span>
               </div>
             </motion.div>
           </div>
@@ -92,7 +109,7 @@ export function Gallery() {
         {/* Row 2: Three equal columns */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
           {[
-            { src: "/images/pizza-pepperoni-box.jpeg", alt: "Pizza pepperoni în cutie", label: "Pepperoni" },
+            { src: "/images/WhatsApp Image 2026-10-29 at 14.32.36 (3).jpeg", alt: "Pizza artizanală proaspăt coaptă", label: "Proaspăt coaptă" },
             { src: "/images/pizza-nduja.jpeg", alt: "Pizza cu nduja", label: "Nduja" },
             { src: "/images/pizza-making-calzone.jpeg", alt: "Pregătire calzone", label: "Handmade" },
           ].map((img, i) => (
@@ -130,8 +147,8 @@ export function Gallery() {
               className="relative aspect-square overflow-hidden group"
             >
               <Image
-                src="/images/pizza-making-pepperoni.jpeg"
-                alt="Pregătirea pizzei Pepperoni"
+                src="/images/WhatsApp Image 2026-10-29 at 14.32.35.jpeg"
+                alt="Pregătirea manuală a pizzei în rulota ARTIGIANALE"
                 fill
                 sizes="(max-width: 768px) 100vw, 42vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -171,8 +188,8 @@ export function Gallery() {
             className="md:col-span-7 relative aspect-[4/3] overflow-hidden group"
           >
             <Image
-              src="/images/pizza-prep-station.jpeg"
-              alt="Stația de pregătire pizza"
+              src="/images/WhatsApp Image 2026-10-29 at 14.32.37.jpeg"
+              alt="Stația de pregătire pizza și cuptorul pentru live cooking"
               fill
               sizes="(max-width: 768px) 100vw, 58vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"

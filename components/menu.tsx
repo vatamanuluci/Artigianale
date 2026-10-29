@@ -30,7 +30,7 @@ const categories = [
   {
     id: "special",
     title: "Special",
-    description: "Disponibile în pachetul Premium",
+    description: "Combinații speciale pentru meniul evenimentului tău",
     items: [
       { name: "Crudo & Parmezan", desc: "Blat napoletan, sos de roșii, mozzarella, prosciutto crudo, parmezan" },
       { name: "Quattro Formaggi", desc: "Blat napoletan, mozzarella, parmezan, gouda, gorgonzola" },
@@ -38,7 +38,6 @@ const categories = [
       { name: "Chorizo & Gorgonzola", desc: "Blat napoletan, sos de roșii, mozzarella, chorizo, gorgonzola" },
       { name: "Mortadella", desc: "Blat napoletan, sos alb, mozzarella, gouda, parmezan, mortadella cu fistic" },
       { name: "Pesto", desc: "Blat napoletan, sos de pesto, mozzarella, bacon" },
-      { name: "Truffle", desc: "Blat napoletan, bază de salsa de trufe, mozzarella, bacon, ciuperci" },
       { name: "Week's Special", desc: "În fiecare săptămână va fi un sortiment diferit - surpriză pentru fiecare eveniment" },
     ],
   },
